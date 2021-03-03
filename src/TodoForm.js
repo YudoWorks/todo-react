@@ -17,6 +17,7 @@ export default function TodoForm({setTodos, todos}) {
     setTodos([newTodo, ...todos])
     setText("");
   }
+  
   return (
     <div>
       <Form onSubmit={handleOnSubmit}>

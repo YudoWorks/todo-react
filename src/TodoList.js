@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Todo from './Todo'
 
 export default function TodoList({todos, setTodos}) {
+
   return (
     <div style={{margin: "1em"}}>
       <ListGroup>
@@ -18,5 +19,6 @@ export default function TodoList({todos, setTodos}) {
 }
 
 TodoList.propTypes = {
-  todos: PropTypes.array
+  todos: PropTypes.array,
+  setTodos: PropTypes.func
 }

@@ -1,14 +1,20 @@
-import React from 'react'
+import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 import ListGroup from 'react-bootstrap/ListGroup'
 import { Trash } from 'react-bootstrap-icons'
 import { Pencil } from 'react-bootstrap-icons'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
+import TodoEditModal from './TodoEditModal'
 
 function Todo({text, id, todos, setTodos}) {
-  function onEdit(params) {
-  
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  function onEdit() {
+    handleShow();
   }
   
   function onDelete() {
@@ -26,17 +32,19 @@ function Todo({text, id, todos, setTodos}) {
           <Button variant='danger' onClick={onDelete}>
             <Trash />
           </Button> 
-          <Button variant='warning'>
+          <Button variant='warning' onClick={onEdit}>
             <Pencil />
           </Button>
         </div>
       </ListGroup.Item>
+      <TodoEditModal handleClose={handleClose} show={show} todos={todos} setTodos={setTodos} id={id}/>
     </div>
   )
 }
 
 Todo.propTypes = {
-  todo: PropTypes.object,
+  text: PropTypes.string,
+  id: PropTypes.number,
   todos: PropTypes.array,
   setTodos: PropTypes.func
 }

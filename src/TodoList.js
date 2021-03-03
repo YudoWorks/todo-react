@@ -1,14 +1,15 @@
 import React from 'react'
 import ListGroup from 'react-bootstrap/ListGroup'
 import PropTypes from 'prop-types'
+import Todo from './Todo'
 
-export default function TodoList({todos}) {
+export default function TodoList({todos, setTodos}) {
   return (
     <div style={{margin: "1em"}}>
       <ListGroup>
         {
           todos.map(todo => {
-            return <ListGroup.Item style={{color: "black", width: "500px", textAlign: "justify"}}>{todo.todo}</ListGroup.Item>
+            return <Todo key={todo.id} text={todo.text} id={todo.id} setTodos={setTodos} todos={todos}/> 
           })
         }
       </ListGroup>

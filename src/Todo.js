@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import TodoEditModal from './TodoEditModal'
 
-function Todo({text, id, todos, setTodos}) {
+function Todo({text, id, isDone, todos, setTodos}) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -22,11 +22,27 @@ function Todo({text, id, todos, setTodos}) {
 
     setTodos(newTodos);
   }
+
+  function onUpdateDoneStatus() {
+    const newTodos = todos.map(todo => {
+      if(todo.id === id) return {...todo, isDone: !isDone}
+
+      return todo;
+    })
+
+    setTodos(newTodos);
+  }
   return (
     <div>
       <ListGroup.Item style={{color: "black", width: "500px", display: "flex", justifyContent: "space-between"}}>
           <Form.Group controlId="todoStatus">
-            <Form.Check type="checkbox" label={text} style={{display:"flex", alignItems:'center'}}/>
+            <Form.Check 
+              type="checkbox" 
+              checked={isDone} 
+              label={text} 
+              style={isDone ? {display:"flex", alignItems:'center', textDecoration: 'line-through'} : {display:"flex", alignItems:'center'}}
+              onChange={onUpdateDoneStatus}
+            />
           </Form.Group>
         <div>
           <Button variant='danger' onClick={onDelete}>
@@ -45,8 +61,9 @@ function Todo({text, id, todos, setTodos}) {
 Todo.propTypes = {
   text: PropTypes.string,
   id: PropTypes.number,
+  isDone: PropTypes.bool,
   todos: PropTypes.array,
-  setTodos: PropTypes.func
+  setTodos: PropTypes.func,
 }
 
 export default Todo

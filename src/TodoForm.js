@@ -12,6 +12,7 @@ export default function TodoForm({setTodos, todos}) {
     const newTodo = {
       id: todos.length + 1,
       text: text,
+      isDone: false
     }
 
     setTodos([newTodo, ...todos])

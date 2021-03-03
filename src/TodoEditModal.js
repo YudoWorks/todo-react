@@ -12,6 +12,7 @@ function TodoEditModal({handleClose, show, todos, setTodos, id}) {
 
     const newTodo = todos.map(todo => {
       if(todo.id === id) return {...todo, text}
+      
       return todo
     })
 

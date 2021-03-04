@@ -1,23 +1,23 @@
-import React, {useState} from 'react'
-import PropTypes from 'prop-types'
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
-function TodoEditModal({handleClose, show, setTodos, id, InitalText}) {
+function TodoEditModal({
+  handleClose, show, setTodos, id, InitalText,
+}) {
   const [text, setText] = useState(InitalText);
 
   function handleOnSubmit(e) {
     e.preventDefault();
 
-    setTodos(prevTodos =>   
-      prevTodos.map(todo => {
-        if(todo.id === id) return {...todo, text}
-        
-        return todo
-      })
-    )
-    setText("");
+    setTodos((prevTodos) => prevTodos.map((todo) => {
+      if (todo.id === id) return { ...todo, text };
+
+      return todo;
+    }));
+    setText('');
     handleClose();
   }
 
@@ -45,15 +45,15 @@ function TodoEditModal({handleClose, show, setTodos, id, InitalText}) {
         </Form>
       </Modal>
     </div>
-  )
+  );
 }
 
 TodoEditModal.propTypes = {
-  handleClose: PropTypes.func,
-  show: PropTypes.bool,
-  setTodos: PropTypes.func,
-  id: PropTypes.number,
-  InitalText: PropTypes.string
-}
+  handleClose: PropTypes.func.isRequired,
+  show: PropTypes.bool.isRequired,
+  setTodos: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+  InitalText: PropTypes.string.isRequired,
+};
 
-export default TodoEditModal
+export default TodoEditModal;

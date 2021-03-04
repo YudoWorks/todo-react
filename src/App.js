@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import './App.css';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList';
@@ -9,8 +9,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <TodoForm setTodos={setTodos}/>
-        <TodoList todos={todos} setTodos={setTodos}/>
+        <TodoForm setTodos={setTodos} />
+        <TodoList todos={todos} setTodos={setTodos} />
       </header>
     </div>
   );

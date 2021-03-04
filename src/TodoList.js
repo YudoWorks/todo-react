@@ -1,24 +1,32 @@
-import React from 'react'
-import ListGroup from 'react-bootstrap/ListGroup'
-import PropTypes from 'prop-types'
-import Todo from './Todo'
+import React from 'react';
+import ListGroup from 'react-bootstrap/ListGroup';
+import PropTypes from 'prop-types';
+import Todo from './Todo';
 
-export default function TodoList({todos, setTodos}) {
-
+export default function TodoList({ todos, setTodos }) {
   return (
-    <div style={{margin: "1em"}}>
+    <div style={{ margin: '1em' }}>
       <ListGroup>
         {
-          todos.map(todo => {
-            return <Todo key={todo.id} text={todo.text} id={todo.id} isDone={todo.isDone} setTodos={setTodos}/> 
-          })
+          todos.map((todo) => (
+            <Todo
+              key={todo.id}
+              text={todo.text}
+              id={todo.id}
+              isDone={todo.isDone}
+              setTodos={setTodos}
+            />
+          ))
         }
       </ListGroup>
     </div>
-  )
+  );
 }
 
 TodoList.propTypes = {
-  todos: PropTypes.array,
-  setTodos: PropTypes.func
-}
+  todos: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+  })).isRequired,
+  setTodos: PropTypes.func.isRequired,
+};

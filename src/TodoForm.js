@@ -3,19 +3,19 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import PropTypes from 'prop-types'
 
-export default function TodoForm({setTodos, todos}) {
+export default function TodoForm({setTodos}) {
   const [text, setText] = useState("");
 
   function handleOnSubmit(e) {
     e.preventDefault();
 
-    const newTodo = {
-      id: todos.length + 1,
-      text: text,
-      isDone: false
-    }
-
-    setTodos([newTodo, ...todos])
+    setTodos(prevTodos => [
+      {     
+        id: prevTodos.length + 1,
+        text: text,
+        isDone: false
+      }, ...prevTodos
+    ])
     setText("");
   }
   
@@ -36,5 +36,4 @@ export default function TodoForm({setTodos, todos}) {
 
 TodoForm.propTypes = {
   setTodos: PropTypes.func,
-  todo: PropTypes.array
 }

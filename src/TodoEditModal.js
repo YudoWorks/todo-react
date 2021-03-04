@@ -4,19 +4,19 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 
-function TodoEditModal({handleClose, show, todos, setTodos, id}) {
-  const [text, setText] = useState("");
+function TodoEditModal({handleClose, show, setTodos, id, InitalText}) {
+  const [text, setText] = useState(InitalText);
 
   function handleOnSubmit(e) {
     e.preventDefault();
 
-    const newTodo = todos.map(todo => {
-      if(todo.id === id) return {...todo, text}
-      
-      return todo
-    })
-
-    setTodos(newTodo)
+    setTodos(prevTodos =>   
+      prevTodos.map(todo => {
+        if(todo.id === id) return {...todo, text}
+        
+        return todo
+      })
+    )
     setText("");
     handleClose();
   }
@@ -51,9 +51,9 @@ function TodoEditModal({handleClose, show, todos, setTodos, id}) {
 TodoEditModal.propTypes = {
   handleClose: PropTypes.func,
   show: PropTypes.bool,
-  todos: PropTypes.array, 
   setTodos: PropTypes.func,
-  id: PropTypes.number
+  id: PropTypes.number,
+  InitalText: PropTypes.string
 }
 
 export default TodoEditModal

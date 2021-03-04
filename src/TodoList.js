@@ -10,7 +10,7 @@ export default function TodoList({todos, setTodos}) {
       <ListGroup>
         {
           todos.map(todo => {
-            return <Todo key={todo.id} text={todo.text} id={todo.id} isDone={todo.isDone} setTodos={setTodos} todos={todos}/> 
+            return <Todo key={todo.id} text={todo.text} id={todo.id} isDone={todo.isDone} setTodos={setTodos}/> 
           })
         }
       </ListGroup>

@@ -7,30 +7,33 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import TodoEditModal from './TodoEditModal'
 
-function Todo({text, id, isDone, todos, setTodos}) {
+function Todo({text, id, isDone, setTodos}) {
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  function handleClose() {
+    setShow(false);
+  }
+
+  function handleShow() {
+    setShow(true);
+  }
 
   function onEdit() {
     handleShow();
   }
   
   function onDelete() {
-    const newTodos = todos.filter((todo) => todo.id !== id);
-
-    setTodos(newTodos);
+    setTodos(prevTodos => prevTodos.filter((todo) => todo.id !== id));
   }
 
   function onUpdateDoneStatus() {
-    const newTodos = todos.map(todo => {
-      if(todo.id === id) return {...todo, isDone: !isDone}
-
-      return todo;
-    })
-
-    setTodos(newTodos);
+    setTodos(prevTodos => {
+      prevTodos.map(todo => {
+        if(todo.id === id) return {...todo, isDone: !isDone}
+  
+        return todo;
+      })
+    });
   }
   return (
     <div>
@@ -53,7 +56,7 @@ function Todo({text, id, isDone, todos, setTodos}) {
           </Button>
         </div>
       </ListGroup.Item>
-      <TodoEditModal handleClose={handleClose} show={show} todos={todos} setTodos={setTodos} id={id}/>
+      <TodoEditModal handleClose={handleClose} show={show} setTodos={setTodos} id={id} InitalText={text}/>
     </div>
   )
 }
@@ -62,7 +65,6 @@ Todo.propTypes = {
   text: PropTypes.string,
   id: PropTypes.number,
   isDone: PropTypes.bool,
-  todos: PropTypes.array,
   setTodos: PropTypes.func,
 }
 
